@@ -6,9 +6,7 @@ Try a [live demo here](https://spacejack.github.io/mithril-range/).
 
 ## Install:
 
-For now, install from this repo with:
-
-    npm install -S github:spacejack/mithril-range
+    npm install -S mithril-range
 
 If you're using a sass compiler, you can add:
 
