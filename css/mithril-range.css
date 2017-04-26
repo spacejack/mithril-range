@@ -1,0 +1,61 @@
+/* Styles for mithril-range */
+
+/* Container hit area */
+.mithril-range {
+	position: relative;
+	width: 100%;
+	padding: 1.5em 1em;
+	box-sizing: border-box;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+	cursor: pointer;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/* Bar in the middle of hit area */
+.mithril-range-bar {
+	position: relative;
+	width: 100%;
+	height: 0.25em;
+	box-sizing: border-box;
+}
+
+/* Empty bar style (above range position) */
+.mithril-range-bar-0 {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 0%;
+	height: 100%;
+	background-color: #CCC;
+	box-sizing: border-box;
+}
+
+/* Filled bar style (below range position) */
+.mithril-range-bar-1 {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #888;
+	box-sizing: border-box;
+}
+
+/* Handle centered on bar */
+.mithril-range-handle {
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin-top: -0.625em;
+	margin-left: -0.375em;
+	display: inline-block;
+	border: #444 1px solid;
+	background-color: #FFF;
+	width: 0.75em;
+	height: 1.5em;
+	box-sizing: border-box;
+}
+/* End styles for mithril-range */
