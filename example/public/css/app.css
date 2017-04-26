@@ -1,0 +1,85 @@
+body, td, th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+}
+
+h1 {
+	margin: 0.5em 0 0.1em 0;
+}
+
+p.small {
+	font-size: 0.85em;
+	margin: 0 0 1.5em 0;
+}
+
+label {
+	display: inline-block;
+	min-width: 3.25em;
+}
+
+input[type=text] {
+	width: 6em;
+}
+
+.demo {
+	border: #DDD 1px solid;
+	box-sizing: border-box;
+}
+
+.demo h2 {
+	margin-left: 0.75em;
+}
+
+.config {
+	margin: 1em;
+}
+
+/* Classes to add to or override mithril-range styles */
+
+/* Horizontal - some simple colour changes */
+.horizontal-range {
+	background-color: #F8F8F8;
+}
+.horizontal-range .mithril-range-handle {
+	background-color: rgba(255,255,255,0.5);
+}
+.horizontal-range:active .mithril-range-handle {
+	background-color: #FF4;
+}
+
+/* Vertical - for this orientation we need to override some horizontal layout defaults. */
+.vertical-range {
+	width: 3em;
+	height: 10em;
+	padding: 1em 1.375em;
+	background-color: #F8F8F8;
+	margin-left: 1em;
+}
+.vertical-range .mithril-range-bar {
+	width: 0.25em;
+	height: 100%;
+}
+.vertical-range .mithril-range-bar-0 {
+	top: 0;
+	left: 0;
+	bottom: auto;
+	right: auto;
+	width: 100%;
+}
+.vertical-range .mithril-range-bar-1 {
+	top: auto;
+	left: 0;
+	bottom: 0;
+	right: auto;
+	width: 100%;
+}
+.vertical-range .mithril-range-handle {
+	margin-left: -0.625em;
+	margin-top: -0.375em;
+	width: 1.5em;
+	height: 0.75em;
+	background-color: rgba(255,255,255,0.5);
+}
+.vertical-range:active .mithril-range-handle {
+	background-color: #FF4;
+}
