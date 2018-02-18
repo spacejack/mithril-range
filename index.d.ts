@@ -5,6 +5,8 @@ export interface Attrs {
     min: number;
     /** Maximum value */
     max: number;
+    /** Optional name of hidden input. If none supplied, no hidden input will be rendered. */
+    name?: string;
     /** Current value (defaults to min) */
     value?: number;
     /** Step size (default 1). 0 means fractions as small as possible. */

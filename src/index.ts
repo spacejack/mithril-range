@@ -40,6 +40,8 @@ export interface Attrs {
 	min: number
 	/** Maximum value */
 	max: number
+	/** Optional name of hidden input. If none supplied, no hidden input will be rendered. */
+	name?: string
 	/** Current value (defaults to min) */
 	value?: number
 	/** Step size (default 1). 0 means fractions as small as possible. */
@@ -94,6 +96,7 @@ const mithrilRange: m.FactoryComponent<Attrs> = function mithrilRange() {
 	function onMouseDown (e: MouseEvent) {
 		if (device === TOUCH) return
 		device = MOUSE
+		if (e.button !== 0) return
 		window.addEventListener('mousemove', onMouseMove)
 		window.addEventListener('mouseup', onMouseUp)
 		onPress(e.clientX, e.clientY)
@@ -287,7 +290,7 @@ const mithrilRange: m.FactoryComponent<Attrs> = function mithrilRange() {
 			elHit.removeEventListener('keydown', onKeyDown)
 		},
 
-		view ({attrs}) {
+		view ({attrs, children}) {
 			updateAttrs(attrs)
 			value = quantize(value, min, max, step)
 			const a: {[id: string]: any} = {
@@ -327,11 +330,19 @@ const mithrilRange: m.FactoryComponent<Attrs> = function mithrilRange() {
 						class: 'mithril-range-bar-1',
 						style: bar1Style
 					}),
-					m('div', {
-						class: 'mithril-range-handle',
-						style: handleStyle
-					})
-				)
+					m('div',
+						{
+							class: 'mithril-range-handle',
+							style: handleStyle
+						},
+						children
+					)
+				),
+				!!attrs.name && m('input', {
+					type: 'hidden',
+					name: attrs.name,
+					value: String(value)
+				})
 			)
 		}
 	}

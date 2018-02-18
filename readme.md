@@ -1,6 +1,6 @@
 # Mithril Custom Range Component
 
-A custom range component for [Mithril](https://mithril.js.org/) 1.1.
+A custom range/slider component for [Mithril.js](https://mithril.js.org/).
 
 Try a [live demo here](https://spacejack.github.io/mithril-range/).
 
@@ -8,13 +8,23 @@ Try a [live demo here](https://spacejack.github.io/mithril-range/).
 
     npm install -S mithril-range
 
+You will need to include the css file for some basic working styles.
+
+Using PostCSS with [postcss-import](https://github.com/postcss/postcss-import) allows you to import the stylesheet from `node_modules`:
+
+```css
+@import "mithril-range";
+```
+
 If you're using a sass compiler, you can add:
 
 ```scss
-@import 'node_modules/mithril-range/index';
+@import "node_modules/mithril-range/index";
 ```
 
-to one of your sass files. Otherwise you can copy that `index.css` file to your project and add it to your html page.
+to one of your sass files.
+
+Otherwise you can copy the `node_modules/mithril-range/index.css` file to your project and add it to your html page.
 
 ## Usage:
 
@@ -40,7 +50,19 @@ m(range, {
 })
 ```
 
-See the example app in the git repo for more.
+Child vnodes of the component will be rendered as children of the handle element. This allows you to display content (like the current value) that moves with the handle. For example:
+
+```javascript
+m(range,
+  {
+    value: myValue,
+    // ...
+  },
+  m('.my-child-element', myValue)
+)
+```
+
+Use CSS to style it however you like. See the example app in the git repo for more code.
 
 ### All component attrs:
 
@@ -50,6 +72,8 @@ interface Attrs {
   min: number
   /** Maximum value */
   max: number
+  /** Optional name of hidden input. If none supplied, no hidden input will be rendered. */
+  name?: string
   /** Current value (defaults to min) */
   value?: number
   /** Step size (default 1). 0 means fractions as small as possible. */

@@ -1,10 +1,10 @@
+"use strict";
 ///////////////////////////////////////////////
 // Mithril Range
 // (c) 2017 by Mike Linkovich
 // https://github.com/spacejack/mithril-range
 // License: MIT
 ///////////////////////////////////////////////
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var m = require("mithril");
 var NONE = 0;
@@ -64,6 +64,8 @@ var mithrilRange = function mithrilRange() {
         if (device === TOUCH)
             return;
         device = MOUSE;
+        if (e.button !== 0)
+            return;
         window.addEventListener('mousemove', onMouseMove);
         window.addEventListener('mouseup', onMouseUp);
         onPress(e.clientX, e.clientY);
@@ -256,7 +258,7 @@ var mithrilRange = function mithrilRange() {
             elHit.removeEventListener('keydown', onKeyDown);
         },
         view: function (_a) {
-            var attrs = _a.attrs;
+            var attrs = _a.attrs, children = _a.children;
             updateAttrs(attrs);
             value = quantize(value, min, max, step);
             var a = {
@@ -298,7 +300,11 @@ var mithrilRange = function mithrilRange() {
             }), m('div', {
                 class: 'mithril-range-handle',
                 style: handleStyle
-            })));
+            }, children)), !!attrs.name && m('input', {
+                type: 'hidden',
+                name: attrs.name,
+                value: String(value)
+            }));
         }
     };
 };
