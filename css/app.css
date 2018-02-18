@@ -83,3 +83,13 @@ input[type=text] {
 .vertical-range:active .mithril-range-handle {
 	background-color: #FF4;
 }
+
+/* Custom value child element */
+.range-value {
+	position: absolute;
+	left: -0.667em;
+	top: -1.75em;
+	width: 2em;
+	text-align: center;
+	background-color: #F8F8F8;
+}
