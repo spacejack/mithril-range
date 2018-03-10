@@ -1,9 +1,9 @@
 import * as m from 'mithril'
 import * as stream from 'mithril/stream'
-import range from '../../src'
-// Range exposes a quantize function so we can easily
+import MithrilRange from '../../src'
+// MithrilRange exposes a quantize function so we can easily
 // sync our app values with possible range values.
-import {quantize} from '../../src'
+const quantize = MithrilRange.quantize
 
 // Horizontal range values
 const value1 = stream(0)
@@ -28,7 +28,7 @@ export default {
 			// Horizontal demo - only redraws on release
 			m('.demo',
 				m('h2', "Horizontal (redraws on release)"),
-				m(range, {
+				m(MithrilRange, {
 					class: 'horizontal-range',
 					min: min1(),
 					max: max1(),
@@ -105,7 +105,7 @@ export default {
 			// Vertical demo - redraws on drag
 			m('.demo', {style: {marginTop: '0.5em'}},
 				m('h2', "Vertical (redraws on drag)"),
-				m(range, {
+				m(MithrilRange, {
 					class: 'vertical-range',
 					min: min2(),
 					max: max2(),
@@ -179,7 +179,7 @@ export default {
 			// Custom child value dem
 			m('.demo',
 				m('h2', "Horizontal (with child value element)"),
-				m(range,
+				m(MithrilRange,
 					{
 						class: 'horizontal-range',
 						min: min3(),

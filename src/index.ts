@@ -5,7 +5,12 @@
 // License: MIT
 ///////////////////////////////////////////////
 
-import * as m from 'mithril'
+declare function require(moduleName: string): any
+import {Static as Mithril, Component} from 'mithril'
+// Script or module?
+const m: Mithril = typeof window === 'object' && typeof window['m'] === 'function'
+	? window['m']
+	: require('mithril')
 
 type Devices = 0 | 1 | 2
 
@@ -62,8 +67,7 @@ export interface Attrs {
 	ondrag? (value: number): false | any
 }
 
-/** Given an input value, quantize it to the step size */
-export function quantize (val: number, min: number, max: number, step: number) {
+function quant (val: number, min: number, max: number, step: number) {
 	if (max - min <= 0) return min
 	if (step <= 0) return clamp(val, min, max)
 	const steps = Math.ceil((max - min) / step)
@@ -72,7 +76,7 @@ export function quantize (val: number, min: number, max: number, step: number) {
 }
 
 /** Range Component */
-const mithrilRange: m.FactoryComponent<Attrs> = function mithrilRange() {
+function MithrilRange(): Component<Attrs> {
 	let elHit: HTMLElement
 	let elBar: HTMLElement
 	let elBar0: HTMLElement
@@ -141,12 +145,12 @@ const mithrilRange: m.FactoryComponent<Attrs> = function mithrilRange() {
 			e.preventDefault()
 			let s = Math.max((max - min) / 10, step)
 			if (s <= 0) s = 1
-			newVal = quantize(value + s, min, max, step)
+			newVal = quant(value + s, min, max, step)
 		} else if (k === 34) { // pgdown
 			e.preventDefault()
 			let s = Math.max((max - min) / 10, step)
 			if (s <= 0) s = 1
-			newVal = quantize(value - s, min, max, step)
+			newVal = quant(value - s, min, max, step)
 		} else if (k === 35) { // end
 			e.preventDefault()
 			newVal = max
@@ -213,18 +217,16 @@ const mithrilRange: m.FactoryComponent<Attrs> = function mithrilRange() {
 	}
 
 	function moveHandle (x: number, y: number) {
-		let barLength: number, delta: number, s: string
+		let barLength: number, delta: number
 		if (orientation === 'vertical') {
 			barLength = rcBar.bottom - rcBar.top
 			delta = rcBar.bottom - y
-			s = 'top'
 		} else {
 			barLength = rcBar.right - rcBar.left
 			delta = x - rcBar.left
-			s = 'left'
 		}
 		delta = clamp(delta, 0, barLength)
-		const val = quantize((delta / barLength) * (max - min) + min, min, max, step)
+		const val = quant((delta / barLength) * (max - min) + min, min, max, step)
 		setStyles(val)
 		return val
 	}
@@ -292,7 +294,7 @@ const mithrilRange: m.FactoryComponent<Attrs> = function mithrilRange() {
 
 		view ({attrs, children}) {
 			updateAttrs(attrs)
-			value = quantize(value, min, max, step)
+			value = quant(value, min, max, step)
 			const a: {[id: string]: any} = {
 				class: 'mithril-range' + (attrs.class != null ? ' ' + attrs.class : ''),
 				tabIndex: '0',
@@ -348,4 +350,9 @@ const mithrilRange: m.FactoryComponent<Attrs> = function mithrilRange() {
 	}
 }
 
-export default mithrilRange
+namespace MithrilRange {
+	/** Given an input value, quantize it to the step size */
+	export const quantize = quant
+}
+
+export default MithrilRange

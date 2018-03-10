@@ -1,5 +1,10 @@
 # Change log
 
+## v0.3.0
+
+* UMD module for script use.
+* `quantize` utility function moved to property of default export.
+
 ## v0.2.0
 
 * Render child vnodes as children of the handle element.

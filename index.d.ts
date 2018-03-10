@@ -1,5 +1,5 @@
 /// <reference types="mithril" />
-import * as m from 'mithril';
+import { Component } from 'mithril';
 export interface Attrs {
     /** Minimum value */
     min: number;
@@ -26,8 +26,10 @@ export interface Attrs {
     /** Callback triggered while dragging */
     ondrag?(value: number): false | any;
 }
-/** Given an input value, quantize it to the step size */
-export declare function quantize(val: number, min: number, max: number, step: number): number;
 /** Range Component */
-declare const mithrilRange: m.FactoryComponent<Attrs>;
-export default mithrilRange;
+declare function MithrilRange(): Component<Attrs>;
+declare namespace MithrilRange {
+    /** Given an input value, quantize it to the step size */
+    const quantize: (val: number, min: number, max: number, step: number) => number;
+}
+export default MithrilRange;
