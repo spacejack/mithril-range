@@ -1,9 +1,8 @@
 import * as m from 'mithril'
 import * as stream from 'mithril/stream'
-import MithrilRange from '../../src'
-// MithrilRange exposes a quantize function so we can easily
+// MithrilRange also exports a quantize function so we can easily
 // sync our app values with possible range values.
-const quantize = MithrilRange.quantize
+import MithrilRange, {quantize} from '../../src'
 
 // Horizontal range values
 const value1 = stream(0)

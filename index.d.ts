@@ -26,10 +26,6 @@ export interface Attrs {
     /** Callback triggered while dragging */
     ondrag?(value: number): false | any;
 }
+export declare function quantize(val: number, min: number, max: number, step: number): number;
 /** Range Component */
-declare function MithrilRange(): Component<Attrs>;
-declare namespace MithrilRange {
-    /** Given an input value, quantize it to the step size */
-    const quantize: (val: number, min: number, max: number, step: number) => number;
-}
-export default MithrilRange;
+export default function MithrilRange(): Component<Attrs>;

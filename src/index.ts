@@ -67,7 +67,7 @@ export interface Attrs {
 	ondrag? (value: number): false | any
 }
 
-function quant (val: number, min: number, max: number, step: number) {
+export function quantize (val: number, min: number, max: number, step: number) {
 	if (max - min <= 0) return min
 	if (step <= 0) return clamp(val, min, max)
 	const steps = Math.ceil((max - min) / step)
@@ -76,7 +76,7 @@ function quant (val: number, min: number, max: number, step: number) {
 }
 
 /** Range Component */
-function MithrilRange(): Component<Attrs> {
+export default function MithrilRange(): Component<Attrs> {
 	let elHit: HTMLElement
 	let elBar: HTMLElement
 	let elBar0: HTMLElement
@@ -145,12 +145,12 @@ function MithrilRange(): Component<Attrs> {
 			e.preventDefault()
 			let s = Math.max((max - min) / 10, step)
 			if (s <= 0) s = 1
-			newVal = quant(value + s, min, max, step)
+			newVal = quantize(value + s, min, max, step)
 		} else if (k === 34) { // pgdown
 			e.preventDefault()
 			let s = Math.max((max - min) / 10, step)
 			if (s <= 0) s = 1
-			newVal = quant(value - s, min, max, step)
+			newVal = quantize(value - s, min, max, step)
 		} else if (k === 35) { // end
 			e.preventDefault()
 			newVal = max
@@ -226,7 +226,7 @@ function MithrilRange(): Component<Attrs> {
 			delta = x - rcBar.left
 		}
 		delta = clamp(delta, 0, barLength)
-		const val = quant((delta / barLength) * (max - min) + min, min, max, step)
+		const val = quantize((delta / barLength) * (max - min) + min, min, max, step)
 		setStyles(val)
 		return val
 	}
@@ -294,7 +294,7 @@ function MithrilRange(): Component<Attrs> {
 
 		view ({attrs, children}) {
 			updateAttrs(attrs)
-			value = quant(value, min, max, step)
+			value = quantize(value, min, max, step)
 			const a: {[id: string]: any} = {
 				class: 'mithril-range' + (attrs.class != null ? ' ' + attrs.class : ''),
 				tabIndex: '0',
@@ -349,10 +349,3 @@ function MithrilRange(): Component<Attrs> {
 		}
 	}
 }
-
-namespace MithrilRange {
-	/** Given an input value, quantize it to the step size */
-	export const quantize = quant
-}
-
-export default MithrilRange

@@ -42,7 +42,7 @@
         window.addEventListener('touchmove', function () { });
         iOSHackApplied = true;
     }
-    function quant(val, min, max, step) {
+    function quantize(val, min, max, step) {
         if (max - min <= 0)
             return min;
         if (step <= 0)
@@ -51,6 +51,7 @@
         var v = min + Math.round(steps * (val - min) / (max - min)) * step;
         return clamp(v, min, max);
     }
+    exports.quantize = quantize;
     /** Range Component */
     function MithrilRange() {
         var elHit;
@@ -117,14 +118,14 @@
                 var s = Math.max((max - min) / 10, step);
                 if (s <= 0)
                     s = 1;
-                newVal = quant(value + s, min, max, step);
+                newVal = quantize(value + s, min, max, step);
             }
             else if (k === 34) {
                 e.preventDefault();
                 var s = Math.max((max - min) / 10, step);
                 if (s <= 0)
                     s = 1;
-                newVal = quant(value - s, min, max, step);
+                newVal = quantize(value - s, min, max, step);
             }
             else if (k === 35) {
                 e.preventDefault();
@@ -203,7 +204,7 @@
                 delta = x - rcBar.left;
             }
             delta = clamp(delta, 0, barLength);
-            var val = quant((delta / barLength) * (max - min) + min, min, max, step);
+            var val = quantize((delta / barLength) * (max - min) + min, min, max, step);
             setStyles(val);
             return val;
         }
@@ -269,7 +270,7 @@
             view: function (_a) {
                 var attrs = _a.attrs, children = _a.children;
                 updateAttrs(attrs);
-                value = quant(value, min, max, step);
+                value = quantize(value, min, max, step);
                 var a = {
                     class: 'mithril-range' + (attrs.class != null ? ' ' + attrs.class : ''),
                     tabIndex: '0',
@@ -317,10 +318,6 @@
             }
         };
     }
-    (function (MithrilRange) {
-        /** Given an input value, quantize it to the step size */
-        MithrilRange.quantize = quant;
-    })(MithrilRange || (MithrilRange = {}));
     exports.default = MithrilRange;
 });
 
