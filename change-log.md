@@ -2,8 +2,7 @@
 
 ## v0.3.0
 
-* UMD module for script use.
-* `quantize` utility function moved to property of default export.
+* UMD for module or script use.
 
 ## v0.2.0
 
