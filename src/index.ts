@@ -1,16 +1,11 @@
 ///////////////////////////////////////////////
 // Mithril Range
-// (c) 2017 by Mike Linkovich
+// (c) 2017-2018 by Mike Linkovich
 // https://github.com/spacejack/mithril-range
 // License: MIT
 ///////////////////////////////////////////////
 
-declare function require(moduleName: string): any
-import {Static as Mithril, Component} from 'mithril'
-// Script or module?
-const m: Mithril = typeof window === 'object' && typeof window['m'] === 'function'
-	? window['m']
-	: require('mithril')
+import * as m from 'mithril'
 
 type Devices = 0 | 1 | 2
 
@@ -76,7 +71,7 @@ export function quantize (val: number, min: number, max: number, step: number) {
 }
 
 /** Range Component */
-export default function MithrilRange(): Component<Attrs> {
+export default function MithrilRange(): m.Component<Attrs> {
 	let elHit: HTMLElement
 	let elBar: HTMLElement
 	let elBar0: HTMLElement

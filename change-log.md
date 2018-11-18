@@ -1,5 +1,9 @@
 # Change log
 
+## v0.4.0
+
+* Revert to commonjs module format.
+
 ## v0.3.0
 
 * UMD for module or script use.

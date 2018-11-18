@@ -1,5 +1,4 @@
-/// <reference types="mithril" />
-import { Component } from 'mithril';
+import * as m from 'mithril';
 export interface Attrs {
     /** Minimum value */
     min: number;
@@ -28,4 +27,4 @@ export interface Attrs {
 }
 export declare function quantize(val: number, min: number, max: number, step: number): number;
 /** Range Component */
-export default function MithrilRange(): Component<Attrs>;
+export default function MithrilRange(): m.Component<Attrs>;
