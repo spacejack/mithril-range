@@ -1,6 +1,6 @@
 {
   "name": "mithril-range",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Mithril custom range component",
   "keywords": [
     "mithril",
@@ -12,8 +12,10 @@
   "license": "MIT",
   "repository": "https://github.com/spacejack/mithril-range",
   "main": "index.js",
+  "module": "index.mjs",
   "scripts": {
     "build-lib": "tsc -p src",
+    "build-mjs": "tsc -p src/tsconfig.mjs.json && mv index.js index.mjs",
     "cp-css": "cp index.css example/public/css/mithril-range.css",
     "serve-ex": "http-server -p 3000 example/public",
     "compile-ex": "browserify --debug example/src/main.ts -p [ tsify --project example/src/tsconfig.json ] -o example/public/js/app.js",
@@ -22,8 +24,9 @@
     "build-es2015": "tsc src/index.ts --target ES2015",
     "clean-ex": "rm -f example/public/js/app.js",
     "clean-lib": "rm -f index.js index.d.ts",
+    "clean-mjs": "rm -f index.mjs",
     "clean-es2015": "rm -f src/index.js",
-    "build": "run-s build-lib build-ex",
+    "build": "run-s build-mjs build-lib build-ex",
     "clean": "run-s clean-lib clean-ex clean-es2015",
     "start": "run-p watch-ex serve-ex"
   },
