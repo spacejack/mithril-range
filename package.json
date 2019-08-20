@@ -1,6 +1,6 @@
 {
   "name": "mithril-range",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Mithril custom range component",
   "keywords": [
     "mithril",
@@ -15,7 +15,7 @@
   "scripts": {
     "build-lib": "tsc -p src",
     "cp-css": "cp index.css example/public/css/mithril-range.css",
-    "serve-ex": "http-server -p 3000 example/public",
+    "serve-ex": "serve -p 3000 example/public",
     "compile-ex": "browserify --debug example/src/main.ts -p [ tsify --project example/src/tsconfig.json ] -o example/public/js/app.js",
     "watch-ex": "run-s cp-css build-lib && watchify -v --debug example/src/main.ts -p [ tsify --project example/src/tsconfig.json ] -o example/public/js/app.js",
     "build-ex": "run-s cp-css && browserify example/src/main.ts -p [ tsify --project example/src/tsconfig.json ] | uglifyjs -cm -o example/public/js/app.js",
@@ -28,15 +28,15 @@
     "start": "run-p watch-ex serve-ex"
   },
   "devDependencies": {
-    "@types/mithril": "^1.1.13",
-    "browserify": "^16.2.3",
-    "http-server": "^0.11.1",
+    "@types/mithril": "^1.1.17",
+    "browserify": "^16.5.0",
+    "serve": "^11.1.0",
     "mithril": "^1.1.6",
     "npm-run-all": "^4.1.5",
     "tsify": "^4.0.1",
-    "tslint": "^5.12.0",
-    "typescript": "^3.2.2",
-    "uglify-js": "^3.4.9",
-    "watchify": "^3.11.0"
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3",
+    "uglify-js": "^3.6.0",
+    "watchify": "^3.11.1"
   }
 }
