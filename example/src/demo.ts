@@ -1,24 +1,30 @@
 import * as m from 'mithril'
-import * as stream from 'mithril/stream'
+import * as Stream from 'mithril/stream'
 // MithrilRange also exports a quantize function so we can easily
 // sync our app values with possible range values.
 import MithrilRange, {quantize} from '../../src'
 
 // Horizontal range values
-const value1 = stream(0)
-const min1 = stream(0)
-const max1 = stream(100)
-const step1 = stream(1)
+const value1 = Stream(0)
+const min1 = Stream(0)
+const max1 = Stream(100)
+const step1 = Stream(1)
 // Vertical range values
-const value2 = stream(0)
-const min2 = stream(0)
-const max2 = stream(100)
-const step2 = stream(1)
+const value2 = Stream(0)
+const min2 = Stream(0)
+const max2 = Stream(100)
+const step2 = Stream(1)
 // Custom child example values
-const value3 = stream(0)
-const min3 = stream(0)
-const max3 = stream(100)
-const step3 = stream(1)
+const value3 = Stream(0)
+const min3 = Stream(0)
+const max3 = Stream(100)
+const step3 = Stream(1)
+
+/** Convenience type for Input Events */
+interface InEvt {
+	currentTarget: HTMLInputElement
+	redraw?: boolean
+}
 
 /** Demo component */
 export default {
@@ -47,12 +53,12 @@ export default {
 						m('input', {
 							type: 'text',
 							value: value1().toString(),
-							onblur: m.withAttr('value', (val: string) => {
-								const v = Number(val)
+							onblur: (e: InEvt) => {
+								const v = Number(e.currentTarget.value)
 								if (!Number.isNaN(v)) {
 									value1(quantize(v, min1(), max1(), step1()))
 								}
-							})
+							}
 						})
 					),
 					m('p',
@@ -60,14 +66,14 @@ export default {
 						m('input', {
 							type: 'text',
 							value: min1().toString(),
-							onblur: m.withAttr('value', (val: string) => {
-								const v = Number(val)
+							onblur: (e: InEvt) => {
+								const v = Number(e.currentTarget.value)
 								if (!Number.isNaN(v)) {
 									min1(v)
 									if (max1() < min1()) max1(min1())
 									value1(quantize(value1(), min1(), max1(), step1()))
 								}
-							})
+							}
 						})
 					),
 					m('p',
@@ -75,14 +81,14 @@ export default {
 						m('input', {
 							type: 'text',
 							value: max1().toString(),
-							onblur: m.withAttr('value', (val: string) => {
-								const v = Number(val)
+							onblur: (e: InEvt) => {
+								const v = Number(e.currentTarget.value)
 								if (!Number.isNaN(v)) {
 									max1(v)
 									if (min1() > max1()) min1(max1())
 									value1(quantize(value1(), min1(), max1(), step1()))
 								}
-							})
+							}
 						})
 					),
 					m('p',
@@ -90,13 +96,13 @@ export default {
 						m('input', {
 							type: 'text',
 							value: step1().toString(),
-							onblur: m.withAttr('value', (val: string) => {
-								const v = Number(val)
+							onblur: (e: InEvt) => {
+								const v = Number(e.currentTarget.value)
 								if (!Number.isNaN(v)) {
 									step1(v)
 									value1(quantize(value1(), min1(), max1(), step1()))
 								}
-							})
+							}
 						})
 					)
 				)
@@ -121,12 +127,12 @@ export default {
 						m('input', {
 							type: 'text',
 							value: value2().toString(),
-							onblur: m.withAttr('value', (val: string) => {
-								const v = Number(val)
+							onblur: (e: InEvt) => {
+								const v = Number(e.currentTarget.value)
 								if (!Number.isNaN(v)) {
 									value2(quantize(v, min2(), max2(), step2()))
 								}
-							})
+							}
 						})
 					),
 					m('p',
@@ -134,14 +140,14 @@ export default {
 						m('input', {
 							type: 'text',
 							value: min2().toString(),
-							onblur: m.withAttr('value', (val: string) => {
-								const v = Number(val)
+							onblur: (e: InEvt) => {
+								const v = Number(e.currentTarget.value)
 								if (!Number.isNaN(v)) {
 									min2(v)
 									if (max2() < min2()) max1(min2())
 									value2(quantize(value2(), min2(), max2(), step2()))
 								}
-							})
+							}
 						})
 					),
 					m('p',
@@ -149,14 +155,14 @@ export default {
 						m('input', {
 							type: 'text',
 							value: max2().toString(),
-							onblur: m.withAttr('value', (val: string) => {
-								const v = Number(val)
+							onblur: (e: InEvt) => {
+								const v = Number(e.currentTarget.value)
 								if (!Number.isNaN(v)) {
 									max2(v)
 									if (min2() > max2()) min2(max2())
 									value2(quantize(value2(), min2(), max2(), step1()))
 								}
-							})
+							}
 						})
 					),
 					m('p',
@@ -164,13 +170,13 @@ export default {
 						m('input', {
 							type: 'text',
 							value: step2().toString(),
-							onblur: m.withAttr('value', (val: string) => {
-								const v = Number(val)
+							onblur: (e: InEvt) => {
+								const v = Number(e.currentTarget.value)
 								if (!Number.isNaN(v)) {
 									step2(v)
 									value2(quantize(value2(), min2(), max2(), step1()))
 								}
-							})
+							}
 						})
 					)
 				)
@@ -198,12 +204,12 @@ export default {
 						m('input', {
 							type: 'text',
 							value: value3().toString(),
-							onblur: m.withAttr('value', (val: string) => {
-								const v = Number(val)
+							onblur: (e: InEvt) => {
+								const v = Number(e.currentTarget.value)
 								if (!Number.isNaN(v)) {
 									value3(quantize(v, min3(), max3(), step3()))
 								}
-							})
+							}
 						})
 					),
 					m('p',
@@ -211,14 +217,14 @@ export default {
 						m('input', {
 							type: 'text',
 							value: min3().toString(),
-							onblur: m.withAttr('value', (val: string) => {
-								const v = Number(val)
+							onblur: (e: InEvt) => {
+								const v = Number(e.currentTarget.value)
 								if (!Number.isNaN(v)) {
 									min3(v)
 									if (max3() < min3()) max3(min3())
 									value1(quantize(value3(), min3(), max3(), step3()))
 								}
-							})
+							}
 						})
 					),
 					m('p',
@@ -226,14 +232,14 @@ export default {
 						m('input', {
 							type: 'text',
 							value: max3().toString(),
-							onblur: m.withAttr('value', (val: string) => {
-								const v = Number(val)
+							onblur: (e: InEvt) => {
+								const v = Number(e.currentTarget.value)
 								if (!Number.isNaN(v)) {
 									max3(v)
 									if (min3() > max3()) min3(max3())
 									value3(quantize(value3(), min3(), max3(), step3()))
 								}
-							})
+							}
 						})
 					),
 					m('p',
@@ -241,13 +247,13 @@ export default {
 						m('input', {
 							type: 'text',
 							value: step3().toString(),
-							onblur: m.withAttr('value', (val: string) => {
-								const v = Number(val)
+							onblur: (e: InEvt) => {
+								const v = Number(e.currentTarget.value)
 								if (!Number.isNaN(v)) {
 									step3(v)
 									value3(quantize(value3(), min3(), max3(), step3()))
 								}
-							})
+							}
 						})
 					)
 				)
